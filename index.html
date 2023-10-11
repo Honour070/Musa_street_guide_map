@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1206px;
+            height: 540px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/proj4.js"></script>
+        <script src="js/proj4leaflet.js"></script>
+        <script src="data/Streets_0.js"></script>
+        <script src="data/Schools_1.js"></script>
+        <script src="data/Religeouscenters_2.js"></script>
+        <script src="data/Railway_3.js"></script>
+        <script src="data/Otherprominentfeatures_4.js"></script>
+        <script src="data/Minorroad_5.js"></script>
+        <script src="data/Majorroad_6.js"></script>
+        <script src="data/Healthfacilities_7.js"></script>
+        <script src="data/Fillingstation_8.js"></script>
+        <script src="data/Banks_9.js"></script>
+        <script src="data/Administrativestructures_10.js"></script>
+        <script src="data/Boundary_11.js"></script>
+        <script>
+        var crs = new L.Proj.CRS('EPSG:32632', '+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', {
+            resolutions: [2800, 1400, 700, 350, 175, 84, 42, 21, 11.2, 5.6, 2.8, 1.4, 0.7, 0.35, 0.14, 0.07],
+        });
+        var map = L.map('map', {
+            crs: crs,
+            continuousWorld: false,
+            worldCopyJump: false, 
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[10.518794823285376,7.398080784575851],[10.533615669721549,7.4312978724273595]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_Streets_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Streets_0_0() {
+            return {
+                pane: 'pane_Streets_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.403921568627451)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Streets_0');
+        map.getPane('pane_Streets_0').style.zIndex = 400;
+        map.getPane('pane_Streets_0').style['mix-blend-mode'] = 'normal';
+        var layer_Streets_0 = new L.geoJson(json_Streets_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Streets_0',
+            layerName: 'layer_Streets_0',
+            pane: 'pane_Streets_0',
+            onEachFeature: pop_Streets_0,
+            style: style_Streets_0_0,
+        });
+        bounds_group.addLayer(layer_Streets_0);
+        map.addLayer(layer_Streets_0);
+        function pop_Schools_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Schools_1_0() {
+            return {
+                pane: 'pane_Schools_1',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/flag.svg',
+            iconSize: [13.680000000000005, 13.680000000000005]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Schools_1');
+        map.getPane('pane_Schools_1').style.zIndex = 401;
+        map.getPane('pane_Schools_1').style['mix-blend-mode'] = 'normal';
+        var layer_Schools_1 = new L.geoJson(json_Schools_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Schools_1',
+            layerName: 'layer_Schools_1',
+            pane: 'pane_Schools_1',
+            onEachFeature: pop_Schools_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Schools_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Schools_1);
+        map.addLayer(layer_Schools_1);
+        function pop_Religeouscenters_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Religeouscenters_2_0() {
+            return {
+                pane: 'pane_Religeouscenters_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/place_of_worship_jewish3.svg',
+            iconSize: [12.160000000000004, 12.160000000000004]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Religeouscenters_2');
+        map.getPane('pane_Religeouscenters_2').style.zIndex = 402;
+        map.getPane('pane_Religeouscenters_2').style['mix-blend-mode'] = 'normal';
+        var layer_Religeouscenters_2 = new L.geoJson(json_Religeouscenters_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Religeouscenters_2',
+            layerName: 'layer_Religeouscenters_2',
+            pane: 'pane_Religeouscenters_2',
+            onEachFeature: pop_Religeouscenters_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Religeouscenters_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Religeouscenters_2);
+        map.addLayer(layer_Religeouscenters_2);
+        function pop_Railway_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Railway_3_0() {
+            return {
+                pane: 'pane_Railway_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_Railway_3_1() {
+            return {
+                pane: 'pane_Railway_3',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Railway_3');
+        map.getPane('pane_Railway_3').style.zIndex = 403;
+        map.getPane('pane_Railway_3').style['mix-blend-mode'] = 'normal';
+        var layer_Railway_3 = new L.geoJson.multiStyle(json_Railway_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Railway_3',
+            layerName: 'layer_Railway_3',
+            pane: 'pane_Railway_3',
+            onEachFeature: pop_Railway_3,
+            styles: [style_Railway_3_0,style_Railway_3_1,]
+        });
+        bounds_group.addLayer(layer_Railway_3);
+        map.addLayer(layer_Railway_3);
+        function pop_Otherprominentfeatures_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Otherprominentfeatures_4_0() {
+            return {
+                pane: 'pane_Otherprominentfeatures_4',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/tourism=museum.svg',
+            iconSize: [12.920000000000003, 12.920000000000003]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Otherprominentfeatures_4');
+        map.getPane('pane_Otherprominentfeatures_4').style.zIndex = 404;
+        map.getPane('pane_Otherprominentfeatures_4').style['mix-blend-mode'] = 'normal';
+        var layer_Otherprominentfeatures_4 = new L.geoJson(json_Otherprominentfeatures_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Otherprominentfeatures_4',
+            layerName: 'layer_Otherprominentfeatures_4',
+            pane: 'pane_Otherprominentfeatures_4',
+            onEachFeature: pop_Otherprominentfeatures_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Otherprominentfeatures_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Otherprominentfeatures_4);
+        map.addLayer(layer_Otherprominentfeatures_4);
+        function pop_Minorroad_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Minorroad_5_0() {
+            return {
+                pane: 'pane_Minorroad_5',
+                opacity: 1,
+                color: 'rgba(172,91,49,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Minorroad_5');
+        map.getPane('pane_Minorroad_5').style.zIndex = 405;
+        map.getPane('pane_Minorroad_5').style['mix-blend-mode'] = 'normal';
+        var layer_Minorroad_5 = new L.geoJson(json_Minorroad_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Minorroad_5',
+            layerName: 'layer_Minorroad_5',
+            pane: 'pane_Minorroad_5',
+            onEachFeature: pop_Minorroad_5,
+            style: style_Minorroad_5_0,
+        });
+        bounds_group.addLayer(layer_Minorroad_5);
+        map.addLayer(layer_Minorroad_5);
+        function pop_Majorroad_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Majorroad_6_0() {
+            return {
+                pane: 'pane_Majorroad_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Majorroad_6');
+        map.getPane('pane_Majorroad_6').style.zIndex = 406;
+        map.getPane('pane_Majorroad_6').style['mix-blend-mode'] = 'normal';
+        var layer_Majorroad_6 = new L.geoJson(json_Majorroad_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Majorroad_6',
+            layerName: 'layer_Majorroad_6',
+            pane: 'pane_Majorroad_6',
+            onEachFeature: pop_Majorroad_6,
+            style: style_Majorroad_6_0,
+        });
+        bounds_group.addLayer(layer_Majorroad_6);
+        map.addLayer(layer_Majorroad_6);
+        function pop_Healthfacilities_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Healthfacilities_7_0() {
+            return {
+                pane: 'pane_Healthfacilities_7',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/health_hospital.svg',
+            iconSize: [15.2, 15.2]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Healthfacilities_7');
+        map.getPane('pane_Healthfacilities_7').style.zIndex = 407;
+        map.getPane('pane_Healthfacilities_7').style['mix-blend-mode'] = 'normal';
+        var layer_Healthfacilities_7 = new L.geoJson(json_Healthfacilities_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Healthfacilities_7',
+            layerName: 'layer_Healthfacilities_7',
+            pane: 'pane_Healthfacilities_7',
+            onEachFeature: pop_Healthfacilities_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Healthfacilities_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Healthfacilities_7);
+        map.addLayer(layer_Healthfacilities_7);
+        function pop_Fillingstation_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Fillingstation_8_0() {
+            return {
+                pane: 'pane_Fillingstation_8',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/conveneince.svg',
+            iconSize: [12.920000000000003, 12.920000000000003]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Fillingstation_8');
+        map.getPane('pane_Fillingstation_8').style.zIndex = 408;
+        map.getPane('pane_Fillingstation_8').style['mix-blend-mode'] = 'normal';
+        var layer_Fillingstation_8 = new L.geoJson(json_Fillingstation_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Fillingstation_8',
+            layerName: 'layer_Fillingstation_8',
+            pane: 'pane_Fillingstation_8',
+            onEachFeature: pop_Fillingstation_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Fillingstation_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Fillingstation_8);
+        map.addLayer(layer_Fillingstation_8);
+        function pop_Banks_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Banks_9_0() {
+            return {
+                pane: 'pane_Banks_9',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/money_bank2.svg',
+            iconSize: [13.680000000000005, 13.680000000000005]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Banks_9');
+        map.getPane('pane_Banks_9').style.zIndex = 409;
+        map.getPane('pane_Banks_9').style['mix-blend-mode'] = 'normal';
+        var layer_Banks_9 = new L.geoJson(json_Banks_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Banks_9',
+            layerName: 'layer_Banks_9',
+            pane: 'pane_Banks_9',
+            onEachFeature: pop_Banks_9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Banks_9_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Banks_9);
+        map.addLayer(layer_Banks_9);
+        function pop_Administrativestructures_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Administrativestructures_10_0() {
+            return {
+                pane: 'pane_Administrativestructures_10',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/city_building.svg',
+            iconSize: [15.200000000000006, 15.200000000000006]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Administrativestructures_10');
+        map.getPane('pane_Administrativestructures_10').style.zIndex = 410;
+        map.getPane('pane_Administrativestructures_10').style['mix-blend-mode'] = 'normal';
+        var layer_Administrativestructures_10 = new L.geoJson(json_Administrativestructures_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Administrativestructures_10',
+            layerName: 'layer_Administrativestructures_10',
+            pane: 'pane_Administrativestructures_10',
+            onEachFeature: pop_Administrativestructures_10,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Administrativestructures_10_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Administrativestructures_10);
+        map.addLayer(layer_Administrativestructures_10);
+        function pop_Boundary_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Boundary_11_0() {
+            return {
+                pane: 'pane_Boundary_11',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,255,255,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Boundary_11');
+        map.getPane('pane_Boundary_11').style.zIndex = 411;
+        map.getPane('pane_Boundary_11').style['mix-blend-mode'] = 'normal';
+        var layer_Boundary_11 = new L.geoJson(json_Boundary_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Boundary_11',
+            layerName: 'layer_Boundary_11',
+            pane: 'pane_Boundary_11',
+            onEachFeature: pop_Boundary_11,
+            style: style_Boundary_11_0,
+        });
+        bounds_group.addLayer(layer_Boundary_11);
+        map.addLayer(layer_Boundary_11);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Boundary_11.png" /> Boundary': layer_Boundary_11,'<img src="legend/Administrativestructures_10.png" /> Administrative structures': layer_Administrativestructures_10,'<img src="legend/Banks_9.png" /> Banks': layer_Banks_9,'<img src="legend/Fillingstation_8.png" /> Filling station': layer_Fillingstation_8,'<img src="legend/Healthfacilities_7.png" /> Health facilities': layer_Healthfacilities_7,'<img src="legend/Majorroad_6.png" /> Major road': layer_Majorroad_6,'<img src="legend/Minorroad_5.png" /> Minor road': layer_Minorroad_5,'<img src="legend/Otherprominentfeatures_4.png" /> Other prominent features': layer_Otherprominentfeatures_4,'<img src="legend/Railway_3.png" /> Railway': layer_Railway_3,'<img src="legend/Religeouscenters_2.png" /> Religeous centers': layer_Religeouscenters_2,'<img src="legend/Schools_1.png" /> Schools': layer_Schools_1,'<img src="legend/Streets_0.png" /> Streets': layer_Streets_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Streets_0.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Streets_0'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Schools_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Schools_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Religeouscenters_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Religeouscenters_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Otherprominentfeatures_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Otherprominentfeatures_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Minorroad_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Minorroad_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Majorroad_6.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Majorroad_6'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Healthfacilities_7.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Healthfacilities_7'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Fillingstation_8.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Fillingstation_8'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Banks_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Banks_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Administrativestructures_10.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Administrativestructures_10'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Streets_0,layer_Schools_1,layer_Religeouscenters_2,layer_Otherprominentfeatures_4,layer_Minorroad_5,layer_Majorroad_6,layer_Healthfacilities_7,layer_Fillingstation_8,layer_Banks_9,layer_Administrativestructures_10]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Streets_0,layer_Schools_1,layer_Religeouscenters_2,layer_Otherprominentfeatures_4,layer_Minorroad_5,layer_Majorroad_6,layer_Healthfacilities_7,layer_Fillingstation_8,layer_Banks_9,layer_Administrativestructures_10]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Streets_0,layer_Schools_1,layer_Religeouscenters_2,layer_Otherprominentfeatures_4,layer_Minorroad_5,layer_Majorroad_6,layer_Healthfacilities_7,layer_Fillingstation_8,layer_Banks_9,layer_Administrativestructures_10]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Streets_0,layer_Schools_1,layer_Religeouscenters_2,layer_Otherprominentfeatures_4,layer_Minorroad_5,layer_Majorroad_6,layer_Healthfacilities_7,layer_Fillingstation_8,layer_Banks_9,layer_Administrativestructures_10]);
+        });
+        </script>
+    </body>
+</html>
